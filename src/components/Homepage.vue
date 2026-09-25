@@ -3,5 +3,11 @@
 </script>
 
 <template>
-    <h1>Home</h1>
+    <v-container max width="100%">
+        <v-row>
+            <v-col md="8">
+                <h1>Homepage</h1>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
