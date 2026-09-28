@@ -1,12 +1,28 @@
 <script setup>
 import {ref} from 'vue';
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { usePatientsStore} from '@/stores/patients.js';
+
 import Triage from './view-patient/Triage.vue';
 import Consultation from './view-patient/Consultation.vue';
 import Lab from './view-patient/Lab.vue';
 import Presciption from './view-patient/Presciption.vue';
 
+const patientsStore = usePatientsStore()
+const route = useRoute()
+const patient = ref(null)
+
 const tab = ref(null)
 
+onMounted(() => {
+    const id = Number(route.params.id)
+    patientsStore.selectPatient(id)
+
+    patient.value = patientsStore.selectedPatient
+    console.log(patientsStore.selectedPatient)
+
+})
 </script>
 
 <template>
@@ -17,7 +33,7 @@ const tab = ref(null)
             </v-col>
 
             <v-col md="3">
-                <div class="text-title-medium font-weight-medium">Name</div>
+                <div class="text-title-medium font-weight-medium">Name: {{ patient.firstName }}</div>
             </v-col>
 
             <v-col md="3">
