@@ -2,11 +2,11 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useRender } from 'vuetify/lib/util/useRender.mjs'
 import Patients from '@/components/Patients.vue'
+// import { P } from 'vue-router/dist/index-D7ja2BKs.js'
 
 export const usePatientsStore = defineStore('patients', () => {
   
-    const patients = ref(
-        [
+    const createPatientList = () =>[
     {
         id:1,
         firstName:"John",
@@ -48,7 +48,8 @@ export const usePatientsStore = defineStore('patients', () => {
         dob:"2002-08-23"
     }
 ]
-    )
+    const patients = ref(createPatientList())
+
     const selectedPatientId = ref(null)
     const selectedPatient = computed(() => {
         return patients.value.find(user => user.id === selectedPatientId.value)
@@ -63,14 +64,45 @@ export const usePatientsStore = defineStore('patients', () => {
         data.id = lastId + 1
         patients.value.push(data)
     }
+
+    const resetPatients = () => {
+        patients.value = createPatientList()
+    }
+
+     function newTriage(data, patientId){
+        const patient = patients.value.find( p => p.id === patientId);
+        patient.triage = data
+    }
+
+     function newConsultation(data, patientId){
+        const patient = patients.value.find( p => p.id === patientId);
+        patient.consultation = data
+    }
+
+     function newLab(data, patientId){
+        const patient = patients.value.find( p => p.id === patientId);
+        patient.lab = data
+    }
+
+     function newPrescription(data, patientId){
+        const patient = patients.value.find( p => p.id === patientId);
+        patient.prescription = data
+    }
+
   return { 
     patients, 
     addPatient, 
     selectedPatientId, 
     selectedPatient, 
-    selectPatient 
+    selectPatient,
+    resetPatients,
+    newTriage,
+    newConsultation,
+    newLab,
+    newPrescription,
 }
 },
+
 {
     persist: true,
 })
