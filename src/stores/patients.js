@@ -63,5 +63,14 @@ export const usePatientsStore = defineStore('patients', () => {
         data.id = lastId + 1
         patients.value.push(data)
     }
-  return { patients, addPatient, selectedPatientId, selectedPatient, selectPatient }
+  return { 
+    patients, 
+    addPatient, 
+    selectedPatientId, 
+    selectedPatient, 
+    selectPatient 
+}
+},
+{
+    persist: true,
 })

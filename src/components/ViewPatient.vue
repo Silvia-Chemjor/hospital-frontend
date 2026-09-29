@@ -33,7 +33,7 @@ onMounted(() => {
             </v-col>
 
             <v-col md="3">
-                <div class="text-title-medium font-weight-medium">Name: {{ patient.firstName }}</div>
+                <div class="text-title-medium font-weight-medium">Name: {{ patientsStore.selectedPatient.firstName }}</div>
             </v-col>
 
             <v-col md="3">
